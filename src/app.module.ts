@@ -3,6 +3,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { User } from './modules/users/user.entity';
+import { SupabaseConfig } from './config/supabase.config';
+import { SupabaseService } from './services/supabase.service';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { TokenService } from './services/token.service';
+import { AuthController } from './controllers/auth.controller';
+import { UserController } from './controllers/user.controller';
+import { TokenController } from './controllers/token.controller';
 
 @Module({
   imports: [
@@ -25,7 +33,7 @@ import { User } from './modules/users/user.entity';
     }),
     AuthModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AuthController, UserController, TokenController],
+  providers: [SupabaseConfig, SupabaseService, AuthService, UserService, TokenService],
 })
 export class AppModule {}
